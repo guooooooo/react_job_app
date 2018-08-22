@@ -5,10 +5,26 @@ const model = require('./model.js')
 const User = model.getModel('user')
 const _filter = {'pwd': 0, '_v': 0}
 
+// 用户列表
 Router.get('/list',function(req,res){
     // User.remove({},function(e,d){})
     User.find({},function(err,doc){
         return res.json(doc)
+    })
+})
+
+Router.post('/update', function(req,res){
+    const {userid} = req.cookies
+    if (!userid) {
+        return res.json({code: 1})
+    }
+    const body = req.body
+    User.findByIdAndUpdate(userid, body, function(err,doc) {
+        const data = Object.assign({},{
+            user: doc.user,
+            type: doc.type
+        },body)
+        return res.json({code: 0, data})
     })
 })
 
@@ -34,8 +50,7 @@ Router.post('/register',function(req,res){
             if (err) {
                 return res.json({code: 1, msg: '后端出错了'})
             }
-            const {user, type, _id} = doc
-            res.cookie('userid', _id)
+            res.cookie('userid', doc._id)
             return res.json({code: 0, data: doc})            
         })
     })

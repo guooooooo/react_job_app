@@ -27,13 +27,12 @@ class Register extends Component{
 	}
 	handleRegister(){
 		this.props.register(this.state)
-		console.log(this.state)
 	}
 	render(){
 		const RadioItem = Radio.RadioItem
 		return (
 			<div>
-				{this.props.redirectTo?<Redirect to={this.props.redirectTo} />:null}
+				{this.props.redirectTo ? <Redirect to={this.props.redirectTo} /> : null}
 				<Logo></Logo>
 				<WingBlank>
 					<List>
