@@ -7,10 +7,10 @@ import { getUserList } from '../../redux/chatuser.redux'
     state=>state.chatuser,
     {getUserList}
 )
-class Boss extends React.Component{
+class Genius extends React.Component{
     
     componentDidMount() {
-        this.props.getUserList('genius')
+        this.props.getUserList('boss')
     }
     
     render() {
@@ -20,4 +20,4 @@ class Boss extends React.Component{
     }
 }
 
-export default Boss
+export default Genius
