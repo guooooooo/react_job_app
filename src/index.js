@@ -15,13 +15,14 @@ import Register from './container/register/register'
 import BossInfo from './container/bossinfo/bossinfo'
 import GeniusInfo from './container/geniusinfo/geniusinfo'
 import AuthRoute from './component/authroute/authroute'
+import Dashboard from './component/dashboard/dashboard'
 import reducers from './reducer'
 import './config'
 import './index.css'
 
 const store = createStore(reducers, compose(
     applyMiddleware(thunk),
-    window.devToolsExtension ? window.devToolsExtension() : ()=>{}
+    window.devToolsExtension ? window.devToolsExtension() : f=>f
 ))
 
 
@@ -35,6 +36,7 @@ ReactDom.render(
                     <Route path='/geniusinfo' component={GeniusInfo}/>
                     <Route path='/login' component={Login}></Route>
                     <Route path='/register' component={Register}></Route>
+                    <Route component={Dashboard}/>                  
                 </Switch>
             </div>
         </BrowserRouter>     
