@@ -4,18 +4,19 @@ import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { login } from '../../redux/user.redux'
-
+import hocForm from '../../component/hoc-form/hoc-form'
 @connect(
 	state=>state.user,
 	{login}
 )
+@hocForm
 class Login extends Component{
 	constructor(props) {
 		super(props)
-		this.state = {
-			user: '',
-			pwd: ''
-		}
+		// this.state = {
+		// 	user: '',
+		// 	pwd: ''
+		// }
 		this.register = this.register.bind(this)
 		this.handleLogin = this.handleLogin.bind(this)
 	}
@@ -23,13 +24,13 @@ class Login extends Component{
 		this.props.history.push('/register')
 	}
 	handleLogin(){
-		this.props.login(this.state)
+		this.props.login(this.props.state)
 	}
-	handleChange(key, val){
-		this.setState({
-			[key]: val
-		})
-	}
+	// handleChange(key, val){
+	// 	this.setState({
+	// 		[key]: val
+	// 	})
+	// }
 	render(){
 		return (
 			<div>
@@ -38,13 +39,13 @@ class Login extends Component{
 				<WingBlank>
 					<List>
 						<InputItem
-							onChange={val=>{this.handleChange('user', val)}}		
+							onChange={val=>{this.props.handleChange('user', val)}}		
 						>
 							用户
 						</InputItem>						
 						<InputItem
 							type='password'														
-							onChange={val=>{this.handleChange('pwd', val)}}
+							onChange={val=>{this.props.handleChange('pwd', val)}}
 						>
 							密码
 						</InputItem>
