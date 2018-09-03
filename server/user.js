@@ -3,6 +3,7 @@ const utils = require('utility')
 const Router = express.Router()
 const model = require('./model.js')
 const User = model.getModel('user')
+const Chat = model.getModel('chat')
 const _filter = {'pwd': 0, '_v': 0}
 
 // 用户列表
@@ -11,6 +12,16 @@ Router.get('/list',function(req,res){
     const { type } = req.query
     User.find({type},function(err,doc){
         return res.json({code: 0, data: doc})
+    })
+})
+
+Router.get('/getmsglist', function(req,res) {
+    const userid = req.cookies.userid
+    // '$or': [{from: userid, to: userid}]
+    Chat.find({}, function(err, doc) {
+        if (!err) {
+            return res.json({code: 0, msgs: doc})
+        }
     })
 })
 
