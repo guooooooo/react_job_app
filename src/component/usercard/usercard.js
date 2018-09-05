@@ -10,7 +10,7 @@ class UserCard extends React.Component{
     }
 
     handleClick(v) {
-        this.props.history.push(`/chat/${v.user}`)
+        this.props.history.push(`/chat/${v._id}`)
     }
 
     render() {
@@ -18,6 +18,7 @@ class UserCard extends React.Component{
             <WingBlank>
                 <WhiteSpace></WhiteSpace>
                 {this.props.userList.map(v=>(
+                    v.avatar?
                     <div key={v._id}>
                         <Card onClick={() => this.handleClick(v)} >
                             <Card.Header
@@ -36,6 +37,7 @@ class UserCard extends React.Component{
                             </Card.Body>
                         </Card>
                     </div>
+                    :null
                 ))}
             </WingBlank>
         )
