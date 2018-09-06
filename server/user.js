@@ -17,6 +17,8 @@ Router.get('/list',function(req,res){
 
 Router.get('/getmsglist', function(req,res) {
     const userid = req.cookies.userid
+    // Chat.remove({},function(e,d){})
+
     User.find({}, function(e, userdoc) {
         if (!e) {
             let users = {}

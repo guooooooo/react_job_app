@@ -3,14 +3,11 @@ import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
 import { NavBar } from 'antd-mobile'
 import NavLinkBar from '../navlink/navlink'
-import Boss from '../../component/boss/boss'
-import Genius from '../../component/genius/genius'
-import User from '../../component/user/user'
+import Boss from '../boss/boss'
+import Genius from '../genius/genius'
+import User from '../user/user'
+import Msg from '../msg/msg'
 import { getMsgList, recvMsg } from '../../redux/chat.redux'
-
-function Msg() {
-    return <h2>msg</h2>
-}
 
 @connect(
     state=>state,
@@ -19,8 +16,10 @@ function Msg() {
 class Dashboard extends React.Component{
 
     componentDidMount() {
-        this.props.getMsgList()
-        this.props.recvMsg()
+        if (!this.props.chat.chatmsg.length) {
+            this.props.getMsgList()
+            this.props.recvMsg()
+        }
     }
 
     render() {
