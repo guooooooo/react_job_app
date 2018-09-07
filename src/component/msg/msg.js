@@ -16,7 +16,11 @@ class Msg extends React.Component{
             msgGroup[v.chatid] = msgGroup[v.chatid] || []
             msgGroup[v.chatid].push(v)
         })
-        const chatList = Object.values(msgGroup)
+        const chatList = Object.values(msgGroup).sort(((a, b)=>{
+            const a_last = a[a.length-1].create_time
+            const b_last = b[b.length-1].create_time
+            return b_last - a_last
+        }))
         return (
             <div>
                 {chatList.map(v=>{
@@ -29,6 +33,10 @@ class Msg extends React.Component{
                             <Item  
                                 extra={<Badge text={unreadNum}></Badge>}
                                 thumb={avatar}
+                                arrow='horizontal'
+                                onClick={()=>{
+                                    this.props.history.push(`/chat/${targetId}`)
+                                }}
                             >
                                 {userinfo[targetId].name}
                                 <Brief>{lastItem.content}</Brief>
